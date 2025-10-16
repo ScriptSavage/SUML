@@ -14,6 +14,12 @@ df.describe() # statystyki numeryczne
 var = df.columns  # lista kolumn
 print(var)
 
+num_cols = df.select_dtypes(include=['int64','float64']).columns
+cat_cols = df.select_dtypes(include=['object','category']).columns
+
+print(cat_cols)
+print(num_cols)
+
 # brak brakujących danych
 nullData = df.isnull().sum()
 print(nullData)
@@ -37,11 +43,14 @@ plt.xticks(rotation=90)
 plt.show()
 
 
-
 le = LabelEncoder()
+# kodowanie danych kategorycznych
 personEducationEncoding = df['person_education'] = le.fit_transform(df['person_education'])
 loanIntentEncoding = df['loan_intent'] = le.fit_transform(df['loan_intent'])
 person_home_ownershipEncoding = df['person_home_ownership'] = le.fit_transform(df['person_home_ownership'])
 print(personEducationEncoding)
 print(loanIntentEncoding)
 print(person_home_ownershipEncoding)
+
+
+# TO DO ->  rozkład cech , macierze korelacji , wykresy do najważniejszych cech
